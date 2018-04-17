@@ -36,5 +36,17 @@ console.log(os.cpus()); */
 // server.listen(8000, 'localhost');
 // console.log('Server is running at localhost:8000');
 
+let nPort = 8000;
+let sHost = 'localhost';
 const myServer = require('./myServer');
-myServer.start();
+const myRouter = require('./myRouter');
+const myHandler = require('./myHandler');
+
+let handle = {};
+handle['/'] = myHandler.start;
+handle['/start'] = myHandler.start;
+handle['/hello'] = myHandler.hello;
+
+
+myServer.start(nPort, sHost, myRouter.route, handle);
+// myServer(nPort, sHost);
