@@ -1,5 +1,5 @@
 module.exports = function (width) {//이 exports는 함수가 되어 객체를 반환하게 되었음
-    return {
+    return {//객체 리턴
         area : function(){
             return width * width;
         }
