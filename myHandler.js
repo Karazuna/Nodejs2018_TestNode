@@ -50,7 +50,7 @@ function start(res) {
 
 function execute(input) {
     let result = myBrain.getResult(trainedNet, input);
-    let output = result.trump > result.kardashian ? 'Trump' : 'Kardashian';
+    //let output = result.trump > result.kardashian ? 'Trump' : 'Kardashian';
     console.log('trump = ' + Math.round(result.trump * 100) + '%, kardashian = ' + Math.round(result.kardashian * 100) + '%');
     let buffer = ('trump = ' + Math.round(result.trump * 100) + '%, kardashian = ' + Math.round(result.kardashian * 100) + '%');
     return buffer;
