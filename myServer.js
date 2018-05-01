@@ -10,6 +10,8 @@ exports.start = function (port, host, route, handle) {
         // res.writeHead(200, {'Content-type': 'text/html'});
         // res.write(content);
         // res.end();
+        
+        let sPostData = '';
         let sPathname = url.parse(req.url).pathname;
 
         req.setEncoding('utf-8');
@@ -17,8 +19,9 @@ exports.start = function (port, host, route, handle) {
             sPostData += dataChunk;
             console.log('Chunk = ' + dataChunk);
         });
-        req.addListener('end',
-            route(sPathname, handle, res, sPostData));
+        req.addListener('end', function () {
+            route(sPathname, handle, res, sPostData);
+        });
     }
 
     http.createServer(onRequest).listen(port, host);

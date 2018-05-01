@@ -1,15 +1,18 @@
+const queryString = require('querystring');
+
+
 function sleep(millisec) {
     let timeStart = new Date().getTime();
     while (new Date().getTime() < timeStart + millisec);
 }
 
 
-function start(res) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('Hello, start!');
-    res.end();
-    // return 'Hello, start!!';
-}
+// function start(res) {
+//     res.writeHead(200, { 'Content-Type': 'text/html' });
+//     res.write('Hello, start!');
+//     res.end();
+//     // return 'Hello, start!!';
+// }
 
 // function hello(res) {
 //     // sleep(20000); // millisec, 20sec - blocking 
@@ -25,7 +28,7 @@ function start(res) {
 //     }, 20000); //call back
 // }
 
-function hello(res, postData) {
+function start(res) {
     console.log('Request handler \'start\'');
     let sBody = '<html>' + '<head>' +
         '<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />' +
@@ -36,6 +39,19 @@ function hello(res, postData) {
         '<input type="text" name="myNick" /><br>' +
         '<button type="submit">입력 완료</button>' +
         '</form>' + '</body>' + '</html>';
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(sBody);
+    res.end();
+}
+
+function hello(res, postData) {
+    console.log('Request handler \'hello\'');
+    let sBody = '<html>' + '<head>' +
+        '<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />' +
+        '</head>' + '<body>' +
+        '안녕하세요, ' + queryString.parse(postData).myName +
+        '(별명: ' + queryString.parse(postData).myNick + ')님!' +
+        '</body>' + '</html>';
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.write(sBody);
     res.end();
