@@ -3,13 +3,15 @@ const url = require('url');
 
 exports.start = function(port, host, route, handle) {
 // module.exports = function(port, host) {
-    function onRequest(req, res){
-        let sPathname = url.parse(req.url).pathname;
-        let content = route(sPathname, handle);
+    function onRequest(req, res){ //요청 올때 응답에 대한 정의
+        //let sPathname = url.parse(req.url).pathname;//url 요청에 대한 parse가 pathname으로
+        // let content = route(sPathname, handle);
         // route(sPathname);
-        res.writeHead(200, {'Content-type': 'text/html'});
-        res.write(content);
-        res.end();
+        // res.writeHead(200, {'Content-type': 'text/html'});
+        // res.write(content);
+        // res.end();
+        let sPathname = url.parse(req.url).pathname;
+        route(sPathname, handle, res);
     }
 
     http.createServer(onRequest).listen(port, host);
